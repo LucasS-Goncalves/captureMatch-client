@@ -1,0 +1,261 @@
+@import '/src/styles/variables.scss';
+
+.header{
+  width: 100%;
+  height: 72px;
+  background-color: $white;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.174);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .buttonAndDesktokNavContainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .header-hamburgerMenu{
+      width: auto;
+      background: transparent;
+      border: none;
+      width: 35px;
+      height: 35px;
+      transform: scale(1.1);
+
+      svg{
+        width: 35px;
+        height: 35px;
+        path{
+          transition: .2s;
+        }
+      }
+
+      &:hover{
+        svg{
+          path{
+            fill: #4017d4;
+          }
+        }
+      }
+    }
+
+    .logo-img{
+      width: 80px;
+      cursor: pointer;
+    }
+
+    .header-desktopNav{
+      display: none;
+    }
+  }
+
+  .buttons-container{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .header-loginButton{
+      background: $white;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.248);
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: .2s;
+
+      span{
+        text-decoration: none;
+        text-transform: none;
+        -webkit-text-fill-color: rgba(0, 0, 0, 0);
+        background: $gradient-purple-magenta;
+        background-clip: text;
+        -webkit-background-clip: text;
+        font-weight: 600;
+        font-size: 1rem;
+        z-index: 2;
+      }
+
+      &:hover{
+        background: $white-2;
+      }
+    }
+
+    .header-signButton{
+      position: relative;
+      background: $gradient-purple-magenta;
+      padding: 10px 15px;
+      border-radius: 5px;
+
+      span{
+        color: $white;
+        font-weight: 600;
+        font-size: 1rem;
+        z-index: 2;
+        position: relative;
+      }
+
+      &::after{
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: $black;
+        opacity: 0;
+        border-radius: 5px;
+        transition: .2s;
+        z-index: 1;
+      }
+
+      &:hover::after{
+        opacity: .2;
+      }
+    }
+  }
+
+
+  .header-mobileNav{
+    position: fixed;
+    top: 0;
+    left: -100%;
+    background-color: $white;
+    width: 100%;
+    max-width: 300px;
+    height: 100%;
+    z-index: 99;
+    transition: .4s;
+
+    .closeMenuButton{
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      transform: scale(1.5);
+
+      svg{
+        path{
+          fill: $black;
+          transition: .2s;
+        }
+      }
+
+      &:hover{
+        svg{
+          path{
+            fill: $pink;
+          }
+        }
+      }
+    }
+
+    .links_list{
+      display: flex;
+      flex-direction: column;
+      margin-top: 70px;
+
+      .link{
+        padding: 13px 0px 13px 40px;
+        cursor: pointer;
+        transition: .2s;
+
+        a{
+          font-weight: 400;
+          color: $black;
+          font-size: 1.2rem;
+          transition: .2s;
+        }
+
+        &:hover{
+          padding-left: 50px;
+          a{
+            color: #bc129a;
+            display: block;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .header-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $black;
+    width: 100%;
+    height: 100%;
+    z-index: 98;
+    visibility: hidden;
+    opacity: 0;
+    transition: .4s ease;
+  }
+
+  &.menuOpened{
+    .header-mobileNav{
+      background-color: $white;
+      left: 0;
+    }
+
+    .header-overlay{
+      visibility: visible;
+      opacity: .3;
+    }
+  }
+
+}
+
+
+@media(min-width: 650px){
+
+  .header{
+    padding: 0 30px;
+
+    .buttonAndDesktokNavContainer{
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      .header-hamburgerMenu{
+        display: none;
+      }
+
+      .header-desktopNav{
+        display: block;
+
+        .links_list{
+          display: flex;
+          flex-direction: row;
+          gap: 30px;
+
+          .link{
+            border-radius: 5px;
+            transition: .2s;
+
+            a{
+              color: $black;
+              font-size: 1rem;
+              font-weight: 500;
+              transition: .3s;
+            }
+
+            &:hover{
+              a{
+                color: $pink;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1100px){
+
+  .header{
+    padding: 0 40px;
+
+    .buttonAndDesktokNavContainer{
+      gap: 40px;
+    }
+  }
+}

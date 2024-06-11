@@ -1,0 +1,158 @@
+@import '/src/styles/variables.scss';
+
+.registerSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $white;
+  padding: 0 15px;
+  padding-top: 50px;
+  padding-bottom: 80px;
+  gap: 50px;
+
+  .logo{
+    width: 120px;
+    cursor: pointer;
+  }
+
+  .register-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $white;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.129);
+    padding: 40px 25px;
+    border-radius: 20px;
+
+    .title{
+      font-size: 2rem;
+      background: $gradient-purple-magenta;
+      font-family: $space-grotesk;
+      text-align: center;
+      color: $white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      letter-spacing: .5px;
+    }
+
+    .goals-container{
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+
+      .client-goal{
+        background-color: $white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.103);
+        transition: .2s;
+
+        .button-text{
+          font-size: 1rem;
+          text-align: center;
+          -webkit-text-fill-color: rgba(0, 0, 0, 0);
+          background: $gradient-magenta-purple;
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: $lexend-deca;
+          font-weight: 500;
+          letter-spacing: .2px;
+        }
+
+        &:hover{
+          box-shadow: 0px 0px 5px 0px #bc159b41;
+          transform: translateY(-3px);
+        }
+      }
+
+      .line{
+        width: 70px;
+        height: 5px;
+        background: $gradient-purple-magenta-3;
+        transform: scaleY(-1);
+        border-radius: 3px;
+      }
+
+
+      .photographer-goal{
+        background-color: $white;
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.103);
+        padding: 15px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: .2s;
+
+        .button-text{
+          font-size: 1rem;
+          text-align: center;
+          -webkit-text-fill-color: rgba(0, 0, 0, 0);
+          background: $gradient-purple-magenta;
+          background-clip: text;
+          -webkit-background-clip: text;
+          font-family: $lexend-deca;
+          font-weight: 500;
+          letter-spacing: .5px;
+        }
+
+        &:hover{
+          box-shadow: 0px 0px 5px 0px #2d0f9941;
+          transform: translateY(-3px);
+        }
+      }
+    }
+
+    .loginText{
+      font-size: .9375rem;
+      font-family: $dosis;
+      margin-top: 40px;
+      color: $black;
+
+      a{
+        color: $purple;
+        font-size: .9375rem;
+        font-family: $dosis;
+      }
+    }
+  }
+}
+
+@media(min-width: 650px){
+
+  .registerSection{
+
+    .logo{
+      width: 130px;
+    }
+
+    .register-container{
+      padding: 50px 45px;
+      border-radius: 20px;
+
+      .title{
+        font-size: 2.2rem;
+        padding: 25px 50px;
+      }
+
+      .goals-container{
+        margin-top: 60px;
+
+        .client-goal{
+
+          .button-text{
+            font-size: 1.1rem;
+          }
+        }
+
+        .photographer-goal{
+
+          .button-text{
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+}

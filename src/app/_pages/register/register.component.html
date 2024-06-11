@@ -1,0 +1,18 @@
+<section class="registerSection">
+  <img src="../../../assets/logo3-removebg-preview.png" alt="CaptureMatch logo" class="logo" routerLink="/">
+  <div class="register-container" *ngIf="displayInitialContainer">
+    <h1 class="title">What's your goal?</h1>
+    <div class="goals-container">
+      <div class="client-goal" (click)="registerClient()">
+        <button class="button-text">I want to find a photographer!</button>
+      </div>
+      <div class="line"></div>
+      <div class="photographer-goal" (click)="registerPhotographer()">
+        <button class="button-text">I want to showcase my talent!</button>
+      </div>
+    </div>
+    <small class="loginText">Already have an account? <a>Sign in</a></small>
+  </div>
+  <app-register-photographer *ngIf="registerAsPhotographer" (backToInitial)="backToInitialContainer()"></app-register-photographer>
+  <app-register-client *ngIf="registerAsClient" (backToInitial)="backToInitialContainer()"></app-register-client>
+</section>

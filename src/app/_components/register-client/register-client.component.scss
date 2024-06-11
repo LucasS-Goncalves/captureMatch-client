@@ -1,0 +1,218 @@
+@import '/src/styles/variables.scss';
+
+.clientContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $white;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.173);
+  border-radius: 20px;
+
+  .img{
+    display: none;
+  }
+
+  .form-container{
+    .title{
+      font-size: 1.4rem;
+      background: $gradient-purple-magenta;
+      font-family: $space-grotesk;
+      text-align: center;
+      color: $white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      letter-spacing: .5px;
+      max-width: 330px;
+    }
+
+    .form{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      gap: 25px;
+
+      .field-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 70%;
+
+        label{
+          align-self: flex-start;
+          font-family: $lexend-deca;
+          font-weight: 400;
+          font-size: .8125rem;
+          color: $purple-2;
+        }
+
+        input{
+          width: 100%;
+          outline: none;
+          padding: 10px 12px;
+          border-radius: 5px;
+          border: 1px solid $purple-2;
+          color: $black-2;
+          font-family: $dosis;
+          font-weight: 500;
+          font-size: 1rem;
+          letter-spacing: .6px;
+          transition: .2s;
+
+          &:focus{
+            box-shadow: 0px 0px 0px 2px rgba(0, 9, 170, 0.301);
+          }
+
+          &::placeholder{
+            opacity: .6;
+          }
+        }
+
+        &.password-field{
+          position: relative;
+
+          .eye-icon{
+            position: absolute;
+            width: 20px;
+            bottom: 23px;
+            right: 8px;
+          }
+
+          input{
+            padding-right: 30px;
+          }
+        }
+      }
+
+      .buttons-container{
+        display: flex;
+        flex-direction: column-reverse;
+
+        .register-button{
+          margin-top: 20px;
+          padding: 12px 22px;
+          border-radius: 7px;
+          background: $gradient-purple-magenta;
+          transition: .4s;
+
+          span{
+            color: $white;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+          }
+
+          &:hover{
+            transform: scale(1.04);
+          }
+        }
+
+        .backText{
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row-reverse;
+          gap: 5px;
+          font-size: .9375rem;
+          font-family: $dosis;
+          margin: 40px 0;
+          color: $black;
+
+          .left-arrow{
+            width: 15px;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media(min-width: 650px){
+
+  .clientContainer{
+    border-radius: 20px;
+
+    .form-container{
+      .title{
+        font-size: 1.5rem;
+        padding: 25px 30px;
+      }
+
+      .form{
+        gap: 30px;
+
+        .field-container{
+
+          label{
+            font-size: .875rem;
+          }
+        }
+
+        .buttons-container{
+
+          .backText{
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1100px){
+
+  .clientContainer{
+    width: 750px;
+    height: 740px;
+    padding: 0;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .img{
+      display: block;
+      height: 100%;
+      width: 50%;
+      object-fit: cover;
+      border-radius: 10px 0 0 10px;
+      box-shadow: 3px 0px 25px 0px rgba(0, 0, 0, 0.145);
+    }
+
+    .form-container{
+      .title{
+        border-radius: 0 10px 0 0;
+        max-width: unset;
+      }
+
+      .form{
+        gap: 20px;
+
+        .field-container{
+
+          label{
+            font-size: .875rem;
+          }
+        }
+
+
+        .buttons-container{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 30px;
+          margin-top: 20px;
+
+          .register-button{
+            margin-top: 0;
+          }
+
+          .backText{
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

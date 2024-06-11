@@ -1,0 +1,31 @@
+//Font-families imports
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inconsolata:wght@200..900&family=Kalam:wght@300;400;700&display=swap');
+
+// Colors
+
+$black: #000000;
+$black-2: #000000;
+
+$white: #ffffff;
+$white-2: #f4f4f4;
+$purple: #4017d4;
+$purple-2: #2d0f99;
+$pink: #bc129a;
+$pink-2: #ee18c3;
+$pink-3: #bc159b;
+$gradient-purple-magenta: linear-gradient(128.87deg, $purple 14.05%, $pink 89.3%);
+$gradient-purple-magenta-2: linear-gradient(128.87deg, #5223fa 14.05%, #ee18c3 89.3%);
+$gradient-purple-magenta-3: linear-gradient(128.87deg, #3a18b6 14.05%, #bc159b 89.3%);
+$gradient-magenta-purple: linear-gradient(128.87deg, $pink 14.05%, $purple 89.3%);
+
+//Font-families
+$space-grotesk: "Space Grotesk", sans-serif;
+$source-sans-3: "Source Sans 3", sans-serif;
+$dosis: "Dosis", sans-serif;
+$lexend-deca: "Lexend Deca", sans-serif;
+$inconsolata: "Inconsolata", monospace;
+$kalam: "Kalam", cursive;

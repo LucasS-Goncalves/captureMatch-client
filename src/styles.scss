@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@import '/src/styles/variables.scss';
+@import "./node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+body{
+  background-color: $white;
+}
+
+*{
+  list-style: none;
+  margin: 0 ;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+ul{
+  padding-left: unset;
+  margin: 0;
+}
+
+a,button{
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: $source-sans-3;
+}
+
+.bs-datepicker-head{
+  background-color: $purple-2 !important;
+}
+
+.bs-datepicker-body table td{
+  color: $black;
+}
+
+.bs-datepicker-body table td.week span{
+  color: $purple-2 !important;
+}
+
+.bs-datepicker-body table th{
+  color: $purple-2 !important;
+  opacity: .5 !important;
+}

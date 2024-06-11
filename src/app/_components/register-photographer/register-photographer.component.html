@@ -1,0 +1,47 @@
+<div class="photographerContainer">
+  <img src="../../../assets/images/images-homepage/photographer-optimized.jpg" alt="Picture of a photographer" class="img">
+  <div class="form-container">
+    <h1 class="title">Showcase your talent!</h1>
+    <form class="form">
+      <div class="field-container">
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" placeholder="John">
+      </div>
+      <div class="field-container">
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" placeholder="Doe">
+      </div>
+      <div class="field-container">
+        <label for="username">Date of birth</label>
+        <input type="text" placeholder="DD/MM/YYYY" bsDatepicker [maxDate]="maxDate" [bsConfig]="{ isAnimated: true }" formControlName="date" />
+        <pre *ngIf="registerForm.value?.dateOfBirth" class="code-preview">{{registerForm.value?.dateOfBirth | date}}</pre>
+      </div>
+      <div class="field-container">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="johndoe">
+      </div>
+      <div class="field-container password-field">
+        <label for="password">Password</label>
+        <input type="{{showPassword ? 'text' : 'password'}}" id="password">
+        <button class="show-password" (click)="toggleShowPassword()" type="button">
+          <img *ngIf="showPassword" src="../../../assets/icons/eye-slash-svgrepo-com.svg" alt="" class="eye-icon">
+          <img *ngIf="!showPassword" src="../../../assets/icons/eye-svgrepo-com.svg" alt="" class="eye-icon">
+        </button>
+      </div>
+
+      <select class="form-select" #state (change)="loadCities($event)">
+        <option selected>Open State</option>
+        <option *ngFor="let state of states" value="{{state.isoCode}}">{{state.name}}</option>
+      </select>
+      <select class="form-select" #city (change)="consoleTest($event)">
+        <option selected>Open City</option>
+        <option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</option>
+      </select>
+
+      <div class="buttons-container">
+        <small class="backText" (click)="backToInitialContainer()">Go back <img src="../../../assets/icons/left-arrow-svgrepo-com.svg" class="left-arrow" alt=""></small>
+        <button class="register-button"><span>Register</span></button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,382 @@
+.benefitsSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+
+  .benefitsSection-title{
+    width: 100%;
+    max-width: 1220px;
+    text-align: center;
+    font-size: 2rem;
+    color: $white;
+    font-weight: 500;
+    margin-bottom: 80px;
+    padding: 70px 40px;
+    background: $gradient-purple-magenta;
+    font-family: $space-grotesk;
+    border-radius: 20px;
+
+    strong{
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
+  }
+
+  .benefitsSection-photographersUsersContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 120px;
+
+    .content{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .content-title{
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin-bottom: 50px;
+        font-family: $space-grotesk;
+        text-decoration: none;
+        text-transform: none;
+        -webkit-text-fill-color: rgba(0, 0, 0, 0);
+        background: $gradient-purple-magenta;
+        background-clip: text;
+        -webkit-background-clip: text;
+        text-align: center;
+      }
+
+      .benefitsArticle{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+
+        .image-container{
+
+          .image{
+            width: 270px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.184);
+            border: 1px solid white;
+          }
+
+          .curved-arrow{
+            display: none;
+          }
+        }
+
+
+        .benefitsList{
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+
+          .benefit{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 10px;
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.116);
+            border-radius: 10px;
+
+            .benefit-icon{
+              width: 40px;
+            }
+
+            .benefitText{
+              text-align: center;
+
+              .title{
+                font-family: $dosis;
+                font-size: 1.1rem;
+                font-weight: 700;
+                letter-spacing: 1.1px;
+                margin-bottom: 20px;
+              }
+
+              .description{
+                font-size: .9375rem;
+                font-weight: 400;
+                font-family: $source-sans-3;
+                max-width: 300px;
+              }
+            }
+
+            &:nth-child(2){
+              &::after{
+                position: absolute;
+                content: "";
+                width: 3px;
+                height: 40px;
+                background-color: $purple;
+                top: 0;
+                transform: translateY(-100%);
+              }
+
+              &::before{
+                position: absolute;
+                content: "";
+                width: 3px;
+                height: 40px;
+                background-color: $purple;
+                bottom: 0;
+                transform: translateY(100%);
+              }
+            }
+          }
+        }
+
+      }
+
+      &:nth-child(even){
+
+        .benefitsArticle{
+
+          .benefitsList{
+
+            .benefit{
+
+              &:nth-child(2){
+                &::after{
+                  background-color: $pink;
+                }
+
+                &::before{
+                  background-color: $pink;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 650px){
+
+  .benefitsSection{
+
+    .benefitsSection-title{
+      font-size: 2.3rem;
+      margin-bottom: 90px;
+      padding: 90px 40px;
+    }
+
+    .benefitsSection-photographersUsersContainer{
+      gap: 130px;
+
+      .content{
+
+        .content-title{
+          font-size: 1.7rem;
+        }
+
+        .benefitsArticle{
+          gap: 60px;
+
+          .image-container{
+
+            .image{
+              width: 300px;
+            }
+          }
+
+          .benefitsList{
+
+            .benefit{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
+
+              .benefitText{
+
+                .title{
+                  font-size: 1.2rem;
+                }
+
+                .description{
+                  font-size: 1rem;
+                  line-height: 25px;
+                  max-width: 340px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media(min-width: 1100px){
+
+  .benefitsSection{
+
+    .benefitsSection-title{
+      font-size: 2.8rem;
+      padding: 120px 40px;
+      margin-bottom: 150px;
+    }
+
+    .benefitsSection-photographersUsersContainer{
+      gap: 150px;
+
+      .content{
+
+        .content-title{
+          align-self: flex-start;
+          font-size: 2.2rem;
+          margin-bottom: 80px;
+        }
+
+        .benefitsArticle{
+          flex-direction: row;
+          gap: 160px;
+
+          .image-container{
+            position: relative;
+
+            .image{
+              width: 400px;
+            }
+
+            .curved-arrow{
+              position: absolute;
+              display: block;
+              top: -20px;
+              right: -25px;
+              transform: translateX(100%);
+              width: 110px;
+            }
+          }
+
+          .benefitsList{
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+
+            .benefit{
+              gap: 10px;
+
+              .benefitText{
+
+                .title{
+                  font-size: 1.2rem;
+                }
+
+                .description{
+                  font-size: 1rem;
+                  line-height: 22px;
+                }
+              }
+            }
+          }
+        }
+
+        &:nth-child(even){
+
+          .content-title{
+            align-self: flex-end;
+          }
+
+          .benefitsArticle{
+            flex-direction: row-reverse;
+
+            .image-container{
+
+              .curved-arrow{
+                top: -10px;
+                left: -25px;
+                transform: translateX(-100%) scaleX(-1);
+                width: 110px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1250px){
+
+  .benefitsSection{
+
+    .benefitsSection-photographersUsersContainer{
+      gap: 140px;
+
+      .content{
+
+        .benefitsArticle{
+          flex-direction: row;
+          gap: 280px;
+
+          .image-container{
+
+            .image{
+              object-fit: cover;
+              object-position: center;
+              width: 420px;
+              height: 620px;
+            }
+
+            .curved-arrow{
+              position: absolute;
+              display: block;
+              top: -20px;
+              right: -50px;
+              transform: translateX(100%);
+              width: 180px;
+            }
+          }
+
+          .benefitsList{
+            align-items: center;
+            justify-content: center;
+
+            .benefit{
+              gap: 10px;
+
+              .benefitText{
+
+                .title{
+                  font-size: 1.2rem;
+                }
+
+                .description{
+                  font-size: 1rem;
+                  line-height: 22px;
+                }
+              }
+            }
+          }
+        }
+
+        &:nth-child(even){
+
+          .benefitsArticle{
+
+            .image-container{
+
+              .curved-arrow{
+                top: -15px;
+                left: -50px;
+                width: 180px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

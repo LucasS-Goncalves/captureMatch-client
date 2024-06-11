@@ -1,0 +1,49 @@
+<header class="header" [class.menuOpened]="menuOpened">
+  <div class="buttonAndDesktokNavContainer">
+    <button class="header-hamburgerMenu" (click)="openMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#000" fill-rule="evenodd" d="M5.75 5.25h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 0 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5z"></path></svg>
+    </button>
+    <img src="../../../assets/logo3-removebg-preview.png" alt="" class="logo-img">
+    <nav class="header-desktopNav">
+      <ul class="links_list">
+        <li class="link">
+          <a>About Us</a>
+        </li>
+        <li class="link">
+          <a>FAQ</a>
+        </li>
+        <li class="link">
+          <a>Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="buttons-container">
+    <button class="header-loginButton">
+      <span>Log in</span>
+    </button>
+    <button class="header-signButton" routerLink="/register">
+      <span>Sign up</span>
+    </button>
+  </div>
+  <nav class="header-mobileNav">
+    <button class="closeMenuButton" (click)="openMenu()">
+      <svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"  /></svg>
+    </button>
+    <ul class="links_list">
+      <li class="link">
+        <a>About Us</a>
+      </li>
+      <li class="link">
+        <a>Services</a>
+      </li>
+      <li class="link">
+        <a>FAQ</a>
+      </li>
+      <li class="link">
+        <a>Contact Us</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="header-overlay" (click)="openMenu()"></div>
+</header>

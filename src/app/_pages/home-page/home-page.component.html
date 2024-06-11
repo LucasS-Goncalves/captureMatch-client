@@ -1,0 +1,188 @@
+<app-navbar></app-navbar>
+<section class="heroSection">
+  <article class="heroSection_text">
+    <h1 class="heroSection_text-title">Capture Match</h1>
+    <h2 class="heroSection_text-subtitle">Connecting <strong>photographers</strong> with <strong>clients</strong> to create lasting <strong style="text-decoration: underline;">memories</strong>.</h2>
+
+    <button class="header-loginButton">
+      <span>Get Started</span>
+    </button>
+  </article>
+
+  <img src="../../../assets/images/images-homepage/wedding-photographers-instagram-optmized.jpg" alt="Photographer taking a picture of a couple">
+</section>
+<section class="dynamicSection">
+  <img src="../../../assets/icons/angle-right-svgrepo-com.svg" alt="" class="angle">
+  <img src="../../../assets/icons/angle-right-svgrepo-com.svg" alt="" class="angle-2">
+  <div class="content">
+    <h3 #dynamicText class="dynamicSection-dynamicText"></h3>
+  </div>
+</section>
+<section class="benefitsSection">
+  <h2 class="benefitsSection-title">Your Photography <strong style="text-decoration: underline;">Solution</strong>.</h2>
+  <div class="benefitsSection-photographersUsersContainer">
+    <div class="content">
+      <h4 class="content-title">Showcase Your Talent</h4>
+      <article class="benefitsArticle">
+        <div class="image-container">
+          <img src="../../../assets/images/images-homepage/photographer-optimized.jpg" alt="Picture of a photographer" class="image">
+          <img src="../../../assets/icons/arrow-curved-svgrepo-com-showcase.svg" alt="Arrow" class="curved-arrow">
+        </div>
+        <ul class="benefitsList">
+          <li class="benefit">
+            <img src="../../../assets/icons/money-svgrepo-com.svg" alt="Money icon" class="benefit-icon" style="width: 55px;">
+            <article class="benefitText">
+              <h6 class="title">
+                Skip the Website Hassle:
+              </h6>
+              <p class="description">
+                Forget the time and expense of building your own website. CaptureMatch provides a professional, pre-built online portfolio ready to showcase your work.
+              </p>
+            </article>
+          </li>
+          <li class="benefit">
+            <img src="../../../assets/icons/camera-svgrepo-com.svg" alt="Camera icon" class="benefit-icon" style="width: 55px;">
+            <article class="benefitText">
+              <h6 class="title">
+                Shine with a Stunning Portfolio:
+              </h6>
+              <p class="description">
+                CaptureMatch allows you to easily create a beautiful online portfolio that highlights your talent and grabs client attention.
+              </p>
+            </article>
+          </li>
+          <li class="benefit">
+            <img src="../../../assets/icons/audience-svgrepo-com.svg" alt="Audience icon" class="benefit-icon">
+            <article class="benefitText">
+              <h6 class="title">
+                Reach a Wider Audience:
+              </h6>
+              <p class="description">
+                Gain exposure to a broader audience of potential clients actively searching for photographers on CaptureMatch.
+              </p>
+            </article>
+          </li>
+        </ul>
+      </article>
+    </div>
+    <div class="content">
+      <h4 class="content-title">Find Your Perfect Photographer</h4>
+      <article class="benefitsArticle">
+        <div class="image-container">
+          <img src="../../../assets/images/images-homepage/couple-walk-through-natural-floral-arbor-ed-peers-photography-optimized.jpg" alt="Picture of a couple" class="image">
+          <img src="../../../assets/icons/arrow-curved-svgrepo-com-find.svg" alt="Arrow" class="curved-arrow">
+        </div>
+        <ul class="benefitsList">
+          <li class="benefit">
+            <img src="../../../assets/icons/checked-tick-svgrepo-com.svg" alt="Checked icon" class="benefit-icon">
+            <article class="benefitText">
+              <h6 class="title">
+                Find Your Perfect Match:
+              </h6>
+              <p class="description">
+                CaptureMatch helps you find photographers whose work aligns perfectly with your vision.
+              </p>
+            </article>
+          </li>
+          <li class="benefit">
+            <img src="../../../assets/icons/time-clock-svgrepo-com.svg" alt="Clock icon" class="benefit-icon">
+            <article class="benefitText">
+              <h6 class="title">
+                Save Time & Effort:
+              </h6>
+              <p class="description">
+                Skip the hassle of researching photographers independently. CaptureMatch provides a one-stop shop for finding, comparing, and booking talented photographers for your needs.
+              </p>
+            </article>
+          </li>
+          <li class="benefit">
+            <img src="../../../assets/icons/star-round-svgrepo-com.svg" alt="Star icon" class="benefit-icon">
+            <article class="benefitText">
+              <h6 class="title">
+                Discover New Talent:
+              </h6>
+              <p class="description">
+                Expand your options beyond traditional search methods and explore the diverse range of photographers available on CaptureMatch.
+              </p>
+            </article>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="faqSection">
+  <article class="faqSection-article">
+    <h3 class="title">
+      Got Questions? <br> We've Got <strong>Answers!</strong>
+    </h3>
+  </article>
+  <div class="questionsList">
+    <div class="questionAnswer-container isActive" (click)="toggleAnswer(q1)" #q1>
+      <div class="questionContainer">
+        <h6 class="question main">
+          What is CaptureMatch and what does it do?
+        </h6>
+        <img src="../../../assets/icons/dropdown-arrow-svgrepo-com.svg" alt="Arrow" class="dropdown-icon">
+      </div>
+      <div class="answer-container">
+        <p class="answer">
+          CaptureMatch is your one-stop platform for connecting with talented photographers and capturing stunning photos for any occasion. We simplify the process for both clients seeking photography services and photographers looking to showcase their work and grow their business.
+        </p>
+      </div>
+    </div>
+    <div class="questionAnswer-container" (click)="toggleAnswer(q2)" #q2>
+      <div class="questionContainer">
+        <h6 class="question">
+          Is there a fee for using CaptureMatch?
+        </h6>
+        <img src="../../../assets/icons/dropdown-arrow-svgrepo-com.svg" alt="Arrow" class="dropdown-icon">
+      </div>
+      <div class="answer-container">
+        <p class="answer">
+          Absolutely not! Signing up and creating a profile on CaptureMatch is completely free for both clients and photographers. You can browse photographer portfolios, search for specific services, and connect with potential clients without any upfront cost.
+        </p>
+      </div>
+    </div>
+    <div class="questionAnswer-container" (click)="toggleAnswer(q3)" #q3>
+      <div class="questionContainer">
+        <h6 class="question">
+          How can I search for photographers in my area?
+        </h6>
+        <img src="../../../assets/icons/dropdown-arrow-svgrepo-com.svg" alt="Arrow" class="dropdown-icon">
+      </div>
+      <div class="answer-container">
+        <p class="answer">
+          Absolutely not! Signing up and creating a profile on CaptureMatch is completely free for both clients and photographers. You can browse photographer portfolios, search for specific services, and connect with potential clients without any upfront cost.
+        </p>
+      </div>
+    </div>
+    <div class="questionAnswer-container" (click)="toggleAnswer(q4)" #q4>
+      <div class="questionContainer">
+        <h6 class="question">
+          How do I sign up to be a photographer on CaptureMatch?
+        </h6>
+        <img src="../../../assets/icons/dropdown-arrow-svgrepo-com.svg" alt="Arrow" class="dropdown-icon">
+      </div>
+      <div class="answer-container">
+        <p class="answer">
+          Fill out a short registration form with your basic information and contact details. Upload high-quality photos that represent your unique style and expertise. The more visually compelling your portfolio, the more likely you are to attract potential clients.
+        </p>
+      </div>
+    </div>
+    <div class="questionAnswer-container" (click)="toggleAnswer(q5)" #q5>
+      <div class="questionContainer">
+        <h6 class="question">
+          How do I book a photography session with a photographer?
+        </h6>
+        <img src="../../../assets/icons/dropdown-arrow-svgrepo-com.svg" alt="Arrow" class="dropdown-icon">
+      </div>
+      <div class="answer-container">
+        <p class="answer">
+          Once you've found the ideal photographer, click the "Contact" button on their profile. This opens a secure messaging system within CaptureMatch. Use the messaging system to discuss your specific needs, preferred date and time, and any questions you might have.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
