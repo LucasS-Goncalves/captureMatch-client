@@ -1,0 +1,15 @@
+@import '/src/styles/variables.scss';
+
+.btn-close{
+  box-shadow: none !important;
+}
+
+.modal-header{
+
+}
+
+.modal-title{
+  font-family: $dosis;
+  font-weight: 600;
+  font-size: 1.5rem;
+}

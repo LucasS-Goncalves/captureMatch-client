@@ -29,14 +29,14 @@
         </button>
       </div>
 
-      <select class="form-select" #state (change)="loadCities($event)">
+      <!-- <select class="form-select" #state (change)="loadCities($event)">
         <option selected>Open State</option>
         <option *ngFor="let state of states" value="{{state.isoCode}}">{{state.name}}</option>
       </select>
-      <select class="form-select" #city (change)="consoleTest($event)">
+      <select class="form-select" #city [disabled]="cities.length === 0">
         <option selected>Open City</option>
         <option *ngFor="let city of cities" value="{{city.name}}">{{city.name}}</option>
-      </select>
+      </select> -->
 
       <div class="buttons-container">
         <small class="backText" (click)="backToInitialContainer()">Go back <img src="../../../assets/icons/left-arrow-svgrepo-com.svg" class="left-arrow" alt=""></small>

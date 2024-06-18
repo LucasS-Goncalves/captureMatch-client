@@ -1,22 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { map, take } from 'rxjs';
-import { State, City } from 'src/app/_interfaces/state_city';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
+import { City, State } from 'src/app/_interfaces/state_city';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
-  selector: 'app-register-client',
-  templateUrl: './register-client.component.html',
-  styleUrls: ['./register-client.component.scss', './styles/state-input.scss']
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.scss', './styles/state-input.scss']
 })
-export class RegisterClientComponent implements OnInit{
+export class RegisterFormComponent implements OnInit{
 
+  title = '';
+  role = '';
   registerForm: FormGroup = new FormGroup({});
   maxDate: Date = new Date();
   showPassword = false;
-  statesOpened = false;
   stateSelected = '';
 
   @Output() backToInitial = new EventEmitter();
@@ -134,68 +135,76 @@ export class RegisterClientComponent implements OnInit{
   ];
   cities: string[] = [];
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router, private http: HttpClient){}
+    constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private accountService: AccountService, private http: HttpClient){}
 
-  ngOnInit(): void {
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-    this.initializeForm();
-    // this.loadCities();
-  }
+    ngOnInit(): void {
+      this.route.fragment.subscribe({
+        next: fragment => {
+          if(fragment !== null){
 
-  backToInitialContainer(){
-    this.backToInitial.emit();
-  }
+            if(fragment.toLowerCase() !== 'client' && fragment.toLowerCase() !== 'photographer') {
+              this.router.navigateByUrl('goal');
+            }
+            this.role = fragment;
 
-  toggleShowPassword(){
-    this.showPassword = !this.showPassword;
-  }
-
-  register(){
-    const dateOfBirth = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
-    // const formValues = ;
-    // this.accountService.register(formValues).subscribe({
-    //   next: () => this.router.navigateByUrl('/home'),
-    //   error: error => console.log(error)
-    // });
-    console.log(dateOfBirth)
-    console.log({...this.registerForm.value, dateOfBirth});
-  }
-
-  loadCities(stateName: string){
-    const stateSelected = stateName;
-    console.log(stateSelected)
-    const state = this.statesWithIso.find(state => state.name.toLowerCase() === stateSelected.toLowerCase());
-
-    if(state){
-      this.http.get<City[]>(`${this.config.cUrl}/${state.isoCode}/cities`, {
-        headers: {"X-CSCAPI-KEY": this.config.cKey}
-      }).pipe(map(
-        response => response.map(item => item.name)
-      )).subscribe({
-        next: response => {
-          console.log(response);
-          this.cities = response;
+            this.title = this.role === 'client' ? 'I want to find a photographer!' : 'I want to showcase my talent!';
+          }
+          else{
+            this.router.navigateByUrl('goal');
+          }
         }
+      });
+
+      this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+      this.initializeForm();
+    }
+
+    register(){
+      const dateOfBirth = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
+      const formValues = {...this.registerForm.value, dateOfBirth};
+      this.accountService.register(formValues).subscribe({
+        error: error => console.log(error)
+      });
+      console.log({...this.registerForm.value, dateOfBirth});
+    }
+
+    loadCities(stateName: string){
+      const stateSelected = stateName;
+      const state = this.statesWithIso.find(state => state.name.toLowerCase() === stateSelected.toLowerCase());
+
+      if(state){
+        this.http.get<City[]>(`${this.config.cUrl}/${state.isoCode}/cities`, {
+          headers: {"X-CSCAPI-KEY": this.config.cKey}
+        }).pipe(map(
+          response => response.map(item => item.name)
+        )).subscribe({
+          next: response => {
+            this.cities = response;
+          }
+        })
+      }
+    }
+
+    toggleShowPassword(){
+      this.showPassword = !this.showPassword;
+    }
+
+    private initializeForm(){
+      this.registerForm = this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        dateOfBirth: ['', [Validators.required]],
+        state: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        userName: ['', Validators.required],
+        password: ['', Validators.required],
+        role: [this.role, Validators.required]
       })
     }
-  }
 
-  private initializeForm(){
-    this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      dateOfBirth: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
-      role: ['client', Validators.required]
-    })
-  }
-
-  private getDateOnly(dateOfBirth: string | undefined){
-    if(!dateOfBirth) return;
-    let dob = new Date(dateOfBirth);
-    return new Date(dob.setMinutes(dob.getMinutes() - dob.getTimezoneOffset())).toISOString().slice(0, 10);
-  }
+    private getDateOnly(dateOfBirth: string | undefined){
+      if(!dateOfBirth) return;
+      let dob = new Date(dateOfBirth);
+      return new Date(dob.setMinutes(dob.getMinutes() - dob.getTimezoneOffset())).toISOString().slice(0, 10);
+    }
 }

@@ -3,16 +3,14 @@
   <div class="register-container" *ngIf="displayInitialContainer">
     <h1 class="title">What's your goal?</h1>
     <div class="goals-container">
-      <div class="client-goal" (click)="registerClient()">
+      <div class="client-goal" routerLink="/register-form" fragment="client">
         <button class="button-text">I want to find a photographer!</button>
       </div>
       <div class="line"></div>
-      <div class="photographer-goal" (click)="registerPhotographer()">
+      <div class="photographer-goal" routerLink="/register-form" fragment="photographer">
         <button class="button-text">I want to showcase my talent!</button>
       </div>
     </div>
     <small class="loginText">Already have an account? <a>Sign in</a></small>
   </div>
-  <app-register-photographer *ngIf="registerAsPhotographer" (backToInitial)="backToInitialContainer()"></app-register-photographer>
-  <app-register-client *ngIf="registerAsClient" (backToInitial)="backToInitialContainer()"></app-register-client>
 </section>

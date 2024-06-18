@@ -1,36 +1,71 @@
 <div class="clientContainer">
-  <img src="../../../assets/images/images-homepage/couple-walk-through-natural-floral-arbor-ed-peers-photography-optimized.jpg" alt="Picture of a couple" class="img">
   <div class="form-container">
     <h1 class="title">I want to find a photographer!</h1>
-    <form class="form">
+    <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="field-container">
         <label for="firstName">First name</label>
-        <input type="text" id="firstName" placeholder="John">
+        <input type="text" id="firstName" placeholder="John" formControlName="firstName">
       </div>
       <div class="field-container">
         <label for="lastName">Last name</label>
-        <input type="text" id="lastName" placeholder="Doe">
+        <input type="text" id="lastName" placeholder="Doe" formControlName="lastName">
       </div>
       <div class="field-container">
-        <label for="username">Date of birth</label>
-        <input type="text" placeholder="DD/MM/YYYY" bsDatepicker [maxDate]="maxDate" [bsConfig]="{ isAnimated: true }" formControlName="date" />
-        <pre *ngIf="registerForm.value?.dateOfBirth" class="code-preview">{{registerForm.value?.dateOfBirth | date}}</pre>
+        <label for="dateOfBirth">Date of birth</label>
+        <input type="text" placeholder="DD/MM/YYYY" bsDatepicker [maxDate]="maxDate" [bsConfig]="{ isAnimated: true }" formControlName="date" formControlName="dateOfBirth" id="dateOfBirth"/>
       </div>
+
       <div class="field-container">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="johndoe">
+        <label for="state">State</label>
+        <input [(ngModel)]="stateSelected" [typeahead]="states" (keyup.enter)="loadCities(stateSelected)" [optionsListTemplate]="customListTemplate" formControlName="state" id="state" placeholder="Alaska">
+
+        <ng-template #customListTemplate let-matches="matches" let-query="query" let-typeaheadTemplateMethods class="list-container">
+          <ul class="custom-list-group">
+            <li class="custom-list-group-item"
+             *ngFor="let match of matches"
+             [class.active]="typeaheadTemplateMethods.isActive(match)"
+             (click)="typeaheadTemplateMethods.selectMatch(match, $event)"
+             (click)="loadCities(match.item)"
+             (mouseenter)="typeaheadTemplateMethods.selectActive(match)">
+            {{ match.item }}
+            </li>
+          </ul>
+        </ng-template>
+      </div>
+
+      <div class="field-container">
+        <label for="city">City</label>
+        <input [typeahead]="cities" [optionsListTemplate]="customListTemplate" formControlName="city" id="city" placeholder="Fairbanks">
+
+        <ng-template #customListTemplate let-matches="matches" let-query="query" let-typeaheadTemplateMethods class="list-container">
+          <ul class="custom-list-group">
+            <li class="custom-list-group-item"
+             *ngFor="let match of matches"
+             [class.active]="typeaheadTemplateMethods.isActive(match)"
+             (click)="typeaheadTemplateMethods.selectMatch(match, $event)"
+             (mouseenter)="typeaheadTemplateMethods.selectActive(match)">
+            {{ match.item }}
+            </li>
+          </ul>
+        </ng-template>
+      </div>
+
+      <div class="field-container">
+        <label for="userName">Username</label>
+        <input type="text" id="userName" placeholder="johndoe" formControlName="userName">
       </div>
       <div class="field-container password-field">
         <label for="password">Password</label>
-        <input type="{{showPassword ? 'text' : 'password'}}" id="password">
+        <input type="{{showPassword ? 'text' : 'password'}}" id="password" formControlName="password">
         <button class="show-password" (click)="toggleShowPassword()" type="button">
           <img *ngIf="showPassword" src="../../../assets/icons/eye-slash-svgrepo-com.svg" alt="" class="eye-icon">
           <img *ngIf="!showPassword" src="../../../assets/icons/eye-svgrepo-com.svg" alt="" class="eye-icon">
         </button>
       </div>
+
       <div class="buttons-container">
         <small class="backText" (click)="backToInitialContainer()">Go back <img src="../../../assets/icons/left-arrow-svgrepo-com.svg" class="left-arrow" alt=""></small>
-        <button class="register-button"><span>Register</span></button>
+        <button class="register-button" type="submit" ><span>Register</span></button>
       </div>
     </form>
   </div>

@@ -1,0 +1,72 @@
+@import '/src/styles/variables.scss';
+
+.input-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  label{
+    align-self: flex-start;
+    font-family: $lexend-deca;
+    font-weight: 400;
+    font-size: .8125rem;
+    color: $purple-2;
+  }
+
+  input{
+    width: 100%;
+    outline: none;
+    padding: 10px 12px;
+    border-radius: 5px;
+    border: 1px solid $purple-2;
+    color: $black-2;
+    font-family: $dosis;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: .6px;
+    transition: .2s;
+
+    &:focus{
+      box-shadow: 0px 0px 0px 2px rgba(0, 9, 170, 0.301);
+    }
+
+    &::placeholder{
+      opacity: .6;
+    }
+  }
+}
+
+.custom-list-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 250px;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.custom-list-group-item {
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+  background-color: #fff;
+}
+
+.custom-list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: $purple;
+}
+
+
+@media(min-width: 650px){
+
+  .input-container{
+
+    label{
+      font-size: .875rem;
+    }
+  }
+}

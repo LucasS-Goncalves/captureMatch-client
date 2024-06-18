@@ -19,16 +19,16 @@
     </nav>
   </div>
   <div class="buttons-container">
-    <button class="header-loginButton">
+    <button class="header-loginButton" (click)="openModal(template)">
       <span>Log in</span>
     </button>
-    <button class="header-signButton" routerLink="/register">
+    <button class="header-signButton" routerLink="/goal">
       <span>Sign up</span>
     </button>
   </div>
   <nav class="header-mobileNav">
     <button class="closeMenuButton" (click)="openMenu()">
-      <svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"  /></svg>
+      <svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"/></svg>
     </button>
     <ul class="links_list">
       <li class="link">
@@ -47,3 +47,14 @@
   </nav>
   <div class="header-overlay" (click)="openMenu()"></div>
 </header>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Log in</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template>

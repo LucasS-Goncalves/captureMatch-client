@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-goal',
+  templateUrl: './goal.component.html',
+  styleUrls: ['./goal.component.scss']
 })
-export class RegisterComponent {
+export class GoalComponent {
   registerAsPhotographer = false;
   registerAsClient = false;
   displayInitialContainer = true;

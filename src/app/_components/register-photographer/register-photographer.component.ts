@@ -1,14 +1,8 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { City, State } from 'src/app/_interfaces/state_city';
 
-interface State{
-  name: string,
-  isoCode: string
-}
 
-interface City{
-  name: string
-}
 
 @Component({
   selector: 'app-register-photographer',
@@ -80,7 +74,7 @@ export class RegisterPhotographerComponent implements OnInit{
     { name: 'Wisconsin', isoCode: 'WI' },
     { name: 'Wyoming', isoCode: 'WY' }
   ];
-  cities!: City[];
+  cities: City[] = [];
 
   constructor(private fb: FormBuilder){}
 
@@ -103,17 +97,13 @@ export class RegisterPhotographerComponent implements OnInit{
     this.showPassword = !this.showPassword;
   }
 
-  loadCities(event: any){
-    const stateSelected = event.target.value;
-    console.log(stateSelected)
-    fetch(`${this.config.cUrl}/${stateSelected}/cities`, {headers: {"X-CSCAPI-KEY": this.config.cKey}})
-      .then(res => res.json())
-      .then(data => {
-        this.cities = data;
-      })
-  }
-
-  consoleTest(event: any){
-    console.log(event.target.value)
-  }
+  // loadCities(event: any){
+  //   const stateSelected = event.target.value;
+  //   console.log(stateSelected)
+  //   fetch(`${this.config.cUrl}/${stateSelected}/cities`, {headers: {"X-CSCAPI-KEY": this.config.cKey}})
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       this.cities = data;
+  //     })
+  // }
 }

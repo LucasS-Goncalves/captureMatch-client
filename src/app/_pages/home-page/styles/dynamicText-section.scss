@@ -1,3 +1,13 @@
+@keyframes animateText {
+  40%, 60%{
+    left: 100%;
+  }
+
+  100%{
+    left: 0%;
+  }
+}
+
 .dynamicSection{
   max-width: 1220px;
   position: relative;
@@ -9,18 +19,24 @@
   justify-content: center;
   padding: 0 40px;
 
-  .dynamicSection-dynamicText{
+  .content{
+    position: relative;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.5rem;
-    height: 60px;
-    color: $black;
-    font-weight: 400;
-    font-family: $space-grotesk;
+    .dynamicSection-dynamicText{
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1.5rem;
+      height: 120px;
+      color: $black;
+      font-weight: 400;
+      font-family: $space-grotesk;
+      margin: 0;
+    }
   }
+
 
   .angle{
     position: absolute;
@@ -65,10 +81,14 @@
     margin-top: 300px;
     margin-bottom: 320px;
 
-    .dynamicSection-dynamicText{
-      font-size: 1.8rem;
-      height: 40px;
+    .content{
+
+      .dynamicSection-dynamicText{
+        font-size: 1.8rem;
+        height: 40px;
+      }
     }
+
 
     .angle{
       display: block;

@@ -11,7 +11,7 @@ export class HomePageComponent implements OnInit{
 
 
   ngOnInit(): void {
-      this.animateText();
+    this.animateText()
   }
 
   async animateText(){
@@ -60,7 +60,10 @@ export class HomePageComponent implements OnInit{
         }
 
         // Wait for the animation to complete
-        await new Promise(resolve => setTimeout(resolve, 100 * textSplit.length + 3000));
+        await new Promise(resolve => setTimeout(resolve, 100 * textSplit.length + 3000))
+          .catch(
+            error => console.log('oi this is an error: ' + error)
+          );
 
         indexOfText++;
 
