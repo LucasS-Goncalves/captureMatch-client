@@ -1,12 +1,10 @@
 @keyframes fade{
   from{
     opacity: 0;
-    transform: translateY(-10px);
   }
 
   to{
     opacity: 1;
-    transform: translateY(0px);
   }
 }
 
@@ -60,6 +58,7 @@
           font-weight: 400;
           color: $black;
           font-size: 1rem;
+          margin-bottom: 0;
 
           &.main{
             text-decoration: none;
@@ -89,7 +88,6 @@
           font-weight: 500;
           font-size: .9375rem;
           font-family: $source-sans-3;
-          opacity: .8;
         }
       }
 

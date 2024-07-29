@@ -1,0 +1,12 @@
+<div class="searchInput-container">
+  <app-search-inputs (appliedFilters)="onApplyFilters($event)" (photographerSeachKey)="onPhotographerKeySearch($event)" (clearedFilters)="onClearFilters()"></app-search-inputs>
+</div>
+<div class="error-container" *ngIf="(photographersCount$ | async) === 0">
+  No photographers found
+</div>
+<main class="cards-container">
+  <div *ngFor="let photographer of (photographers$ | async) as photographers" class="card-container">
+    <app-photographer-card [photographer]="photographer"></app-photographer-card>
+  </div>
+</main>
+

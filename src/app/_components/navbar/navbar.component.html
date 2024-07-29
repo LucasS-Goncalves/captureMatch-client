@@ -1,31 +1,69 @@
 <header class="header" [class.menuOpened]="menuOpened">
   <div class="buttonAndDesktokNavContainer">
+    <a routerLink="/search" *ngIf="user$ | async; else logoContainer">
+      <img src="../../../assets/logo3-removebg-preview.png" alt="" class="logo-img">
+    </a>
+    <ng-template #logoContainer>
+      <a routerLink="/">
+        <img src="../../../assets/logo3-removebg-preview.png" alt="" class="logo-img">
+      </a>
+    </ng-template>
     <button class="header-hamburgerMenu" (click)="openMenu()">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#000" fill-rule="evenodd" d="M5.75 5.25h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 0 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5zm0 6h12.5a.75.75 0 1 1 0 1.5H5.75a.75.75 0 1 1 0-1.5z"></path></svg>
     </button>
-    <img src="../../../assets/logo3-removebg-preview.png" alt="" class="logo-img">
     <nav class="header-desktopNav">
-      <ul class="links_list">
+      <ul class="links_list" *ngIf="user$ | async; else otherLinks">
         <li class="link">
-          <a>About Us</a>
+          <a>Liked Photographers</a>
         </li>
         <li class="link">
-          <a>FAQ</a>
+          <a>Find Photographers</a>
         </li>
         <li class="link">
-          <a>Contact Us</a>
+          <a>Messages</a>
         </li>
       </ul>
+      <ng-template #otherLinks>
+        <ul class="links_list">
+          <li class="link">
+            <a>About Us</a>
+          </li>
+          <li class="link">
+            <a>FAQ</a>
+          </li>
+          <li class="link">
+            <a>Contact Us</a>
+          </li>
+        </ul>
+      </ng-template>
     </nav>
   </div>
-  <div class="buttons-container">
-    <button class="header-loginButton" (click)="openModal(template)">
-      <span>Log in</span>
+  <div class="buttons-container buttons-container-tabletAndDesktop" *ngIf="user$ | async as user; else buttonsContainer">
+    <button type="button" (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" class="profile-dropdown-button">
+      <img src="../../../assets/icons/profile-icon.svg" alt="Profile Icon" class="profile-icon">
     </button>
-    <button class="header-signButton" routerLink="/goal">
-      <span>Sign up</span>
-    </button>
+    <div id="collapseBasic" class="profile-dropdown-container" [collapse]="isCollapsed">
+      <div class="content">
+        <ul>
+          <li (click)="isCollapsed = true" [routerLink]="'/profile/' + user.userName">
+            <a>View Profile</a>
+          </li>
+          <li (click)="logout()">Logout</li>
+        </ul>
+      </div>
+    </div>
   </div>
+  <ng-template #buttonsContainer>
+    <div class="buttons-container buttons-container-tabletAndDesktop">
+      <button class="header-loginButton" (click)="openModal()">
+        <span>Log in</span>
+      </button>
+      <button class="header-signButton" routerLink="/goal">
+        <span>Sign up</span>
+      </button>
+    </div>
+  </ng-template>
   <nav class="header-mobileNav">
     <button class="closeMenuButton" (click)="openMenu()">
       <svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"/></svg>
@@ -44,17 +82,44 @@
         <a>Contact Us</a>
       </li>
     </ul>
+    <div class="buttons-container buttons-container-navbar">
+      <button class="header-loginButton" (click)="openModal()">
+        <span>Log in</span>
+      </button>
+      <button class="header-signButton" routerLink="/goal">
+        <span>Sign up</span>
+      </button>
+    </div>
   </nav>
   <div class="header-overlay" (click)="openMenu()"></div>
 </header>
+
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Log in</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    <div class="login-text-div">
+      <h4 class="modal-title pull-left">Welcome back!</h4>
+    </div>
+    <button class="closeLoginModalButton" (click)="modalRef?.hide()">
+      <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em; height: 1em; vertical-align: middle; fill: currentColor; overflow: hidden;"><path d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"></path></svg>
     </button>
   </div>
   <div class="modal-body">
-    This is a modal.
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+      <fieldset class="field-container">
+        <label for="userName">Username</label>
+        <input type="text" id="userName" placeholder="johndoe" formControlName="userName">
+      </fieldset>
+      <fieldset class="field-container password-field">
+        <label for="password">Password</label>
+        <input type="{{showPassword ? 'text' : 'password'}}" id="password" formControlName="password">
+        <button class="show-password" (click)="toggleShowPassword()" type="button">
+          <img *ngIf="showPassword" src="../../../assets/icons/eye-slash-svgrepo-com.svg" alt="" class="eye-icon">
+          <img *ngIf="!showPassword" src="../../../assets/icons/eye-svgrepo-com.svg" alt="" class="eye-icon">
+        </button>
+      </fieldset>
+      <button class="logIn-button" type="submit" [class.button-disabled]="!loginForm.valid" [disabled]="!loginForm.valid">
+        <span>Log in</span>
+      </button>
+    </form>
   </div>
 </ng-template>

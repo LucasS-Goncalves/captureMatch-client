@@ -1,32 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { map, take } from 'rxjs';
-import { State, City } from 'src/app/_interfaces/state_city';
-import { AccountService } from 'src/app/_services/account.service';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder, ValidatorFn, AbstractControl, Validators } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { State, City } from 'src/app/_models/state_city';
+import { UserParams } from 'src/app/_models/userParams';
 
 @Component({
-  selector: 'app-register-client',
-  templateUrl: './register-client.component.html',
-  styleUrls: ['./register-client.component.scss', './styles/state-input.scss']
+  selector: 'app-search-inputs',
+  templateUrl: './search-inputs.component.html',
+  styleUrls: ['./search-inputs.component.scss']
 })
-export class RegisterClientComponent implements OnInit{
+export class SearchInputsComponent {
 
-  registerForm: FormGroup = new FormGroup({});
-  maxDate: Date = new Date();
-  showPassword = false;
-  statesOpened = false;
-  stateSelected = '';
-
-  @Output() backToInitial = new EventEmitter();
-  @ViewChild('state', {static: true}) stateSelect!: ElementRef<HTMLSelectElement>;
-  @ViewChild('city', {static: true}) citySelect!: ElementRef<HTMLSelectElement>;
-  config = {
-    cUrl: 'https://api.countrystatecity.in/v1/countries/US/states',
-    cKey: 'YnIxNDdZTzVLeHIzd2JVa3hBcjBIc3Bqckx2VnAydWFqem9VNkI5Uw=='
-  }
-
+  searchForm!: FormGroup;
+  @Output() photographerSeachKey = new EventEmitter();
+  @Output() appliedFilters = new EventEmitter();
+  @Output() clearedFilters = new EventEmitter();
+  isCollapsed = true;
   states: string[] = [
     'Alabama',
     'Alaska',
@@ -79,7 +69,6 @@ export class RegisterClientComponent implements OnInit{
     'Wisconsin',
     'Wyoming'
   ];
-
   statesWithIso: State[] = [
     { name: 'Alabama', isoCode: 'AL' },
     { name: 'Alaska', isoCode: 'AK' },
@@ -134,36 +123,23 @@ export class RegisterClientComponent implements OnInit{
   ];
   cities: string[] = [];
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router, private http: HttpClient){}
+  stateSelected = '';
+  citySelected = '';
+  filtersApplied = false;
+  config = {
+    cUrl: 'https://api.countrystatecity.in/v1/countries/US/states',
+    cKey: 'YnIxNDdZTzVLeHIzd2JVa3hBcjBIc3Bqckx2VnAydWFqem9VNkI5Uw=='
+  }
+
+  constructor(private http: HttpClient, private fb: FormBuilder){}
 
   ngOnInit(): void {
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
     this.initializeForm();
-    // this.loadCities();
-  }
-
-  backToInitialContainer(){
-    this.backToInitial.emit();
-  }
-
-  toggleShowPassword(){
-    this.showPassword = !this.showPassword;
-  }
-
-  register(){
-    const dateOfBirth = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
-    // const formValues = ;
-    // this.accountService.register(formValues).subscribe({
-    //   next: () => this.router.navigateByUrl('/home'),
-    //   error: error => console.log(error)
-    // });
-    console.log(dateOfBirth)
-    console.log({...this.registerForm.value, dateOfBirth});
+    this.typeaheadSearch();
   }
 
   loadCities(stateName: string){
     const stateSelected = stateName;
-    console.log(stateSelected)
     const state = this.statesWithIso.find(state => state.name.toLowerCase() === stateSelected.toLowerCase());
 
     if(state){
@@ -173,29 +149,64 @@ export class RegisterClientComponent implements OnInit{
         response => response.map(item => item.name)
       )).subscribe({
         next: response => {
-          console.log(response);
           this.cities = response;
         }
       })
     }
   }
 
+  typeaheadSearch(){
+    this.searchForm.get('photographersSearchName')?.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe({
+      next: value => {
+        this.photographerSeachKey.emit(value)
+      }
+    });
+  }
+
+  applyFilters(){
+    this.filtersApplied = true;
+    const userParams = new UserParams();
+    userParams.state = this.searchForm.controls['state'].value;
+    userParams.city = this.searchForm.controls['city'].value;
+    userParams.photographersSearchKey = this.searchForm.controls['photographersSearchName'].value;
+    this.appliedFilters.emit(userParams);
+    this.stateSelected = this.searchForm.value.state;
+    this.citySelected = this.searchForm.value.city;
+  }
+
+  clearFilters(){
+    this.stateSelected = '';
+    this.citySelected = '';
+    this.filtersApplied = false;
+    const photographersSearchName = this.searchForm.controls['photographersSearchName'].value;
+    this.searchForm.reset({
+      photographersSearchName: photographersSearchName,
+      city: ''
+    })
+    this.clearedFilters.emit(true);
+  }
+
   private initializeForm(){
-    this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      dateOfBirth: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
-      role: ['client', Validators.required]
+    this.searchForm = this.fb.group({
+      state: [''],
+      city: ['', [this.authorizeCityField('state')]],
+      photographersSearchName: ['']
+    });
+    this.searchForm.controls['state'].valueChanges.subscribe({
+      next: () => this.searchForm.controls['city'].updateValueAndValidity()
     })
   }
 
-  private getDateOnly(dateOfBirth: string | undefined){
-    if(!dateOfBirth) return;
-    let dob = new Date(dateOfBirth);
-    return new Date(dob.setMinutes(dob.getMinutes() - dob.getTimezoneOffset())).toISOString().slice(0, 10);
+  private authorizeCityField(stateField: string): ValidatorFn{
+    return (control: AbstractControl) => {
+      const stateFieldReference = control.parent?.get(stateField);
+      if(!stateFieldReference?.value){
+        return {stateFieldIsEmpty: true};
+      }
+      return (stateFieldReference?.value || stateFieldReference.value.length > 0 ) ? null : {stateFieldIsEmpty: true}
+    }
   }
 }

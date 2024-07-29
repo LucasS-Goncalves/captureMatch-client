@@ -1,0 +1,14 @@
+<div class="card-container">
+  <img [src]="photographer.profilePhotoUrl || '../../../assets/images/images-homepage/photographer-optimized.jpg'" alt="" class="user-image">
+  <article class="user-info">
+    <h5 class="user-name">
+      {{photographer.firstName | titlecase}} {{photographer.lastName | titlecase}}
+    </h5>
+    <p class="user-location">
+      {{photographer.city}} - {{photographer.state}}
+    </p>
+    <button class="viewProfile-button" [routerLink]="'/profile/' + photographer.userName">
+      View Profile
+    </button>
+  </article>
+</div>

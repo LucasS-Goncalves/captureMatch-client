@@ -1,0 +1,235 @@
+@import '/src/styles/variables.scss';
+
+:host{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-group{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+
+    .appliedFilters{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      word-break: break-all;
+      background-color: rgb(232, 232, 232);
+      padding: 8px;
+      padding-right: 40px;
+      border-radius: 10px;
+      gap: 5px;
+      position: relative;
+
+      .title-name{
+        width: auto;
+        font-size: .75rem;
+        font-weight: 400;
+        font-family: $lexend-deca;
+
+        strong{
+          font-size: .75rem;
+          font-weight: 600;
+          font-family: $lexend-deca;
+        }
+      }
+
+      .removeFilters-button{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #c7c7c7;
+        border-radius: 100%;
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
+        transition: .2s;
+
+        &:hover{
+          background-color: #b5b5b5;
+        }
+      }
+    }
+
+    .filter-dropdown-button{
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-bottom: 5px;
+
+      span{
+        font-family: $dosis;
+        font-size: 1rem;
+        font-weight: 500;
+        color: $black
+      }
+      .filter-icon{
+        width: 18px;
+      }
+    }
+
+    .fieldsetsContainer{
+      width: 250px;
+      padding: 25px 20px 0 20px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.178);
+      border-radius: 10px;
+
+      .field-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding-bottom: 25px;
+
+        label{
+          align-self: flex-start;
+          font-family: $lexend-deca;
+          font-weight: 400;
+          font-size: .8125rem;
+          color: $purple-2;
+        }
+
+        input{
+          width: 100%;
+          outline: none;
+          padding: 10px 12px;
+          border-radius: 5px;
+          border: 1px solid $purple-2;
+          color: $black-2;
+          font-family: $dosis;
+          font-weight: 500;
+          font-size: 1rem;
+          letter-spacing: .6px;
+          transition: .2s;
+
+          &:focus{
+            box-shadow: 0px 0px 0px 2px rgba(0, 9, 170, 0.301);
+          }
+
+          &::placeholder{
+            opacity: .6;
+          }
+
+          &.formIsInvalid{
+            pointer-events: none;
+            background-color: rgb(228, 228, 228);
+
+            &::placeholder{
+              color: rgb(165, 165, 165);
+            }
+          }
+        }
+      }
+
+      .applyFilter-button{
+        width: 100%;
+        background-color: $purple;
+        padding: 10px;
+        margin-bottom: 20px;
+        color: $white;
+        border-radius: 5px;
+        font-family: $lexend-deca;
+        font-size: .9375rem;
+        letter-spacing: .5px;
+        font-weight: 400;
+        transition: .2s;
+
+        &:hover{
+          background-color: $purple-2;
+        }
+
+        &.formIsInvalid{
+          background-color: $purple-2;
+          cursor: not-allowed;
+        }
+      }
+    }
+}
+
+.custom-list-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 250px;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.custom-list-group-item {
+  position: relative;
+  display: block;
+  padding: .75rem 1.25rem;
+  background-color: #fff;
+}
+
+.custom-list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: $purple;
+}
+
+@media(min-width: 768px){
+
+  .btn-group{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+
+    .appliedFilters{
+
+      .title-name{
+        font-size: .8125rem;
+
+        strong{
+          font-size: .8125rem;
+        }
+      }
+
+      .removeFilters-button{
+        width: 20px;
+        height: 20px;
+
+        svg{
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    .filter-dropdown-button{
+
+      span{
+        font-size: 1.1rem;
+      }
+      .filter-icon{
+        width: 19px;
+      }
+    }
+
+    .fieldsetsContainer{
+      width: 260px;
+
+      .field-container{
+
+        label{
+          font-size: .9375rem;
+        }
+
+        input{
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { User } from '../_interfaces/user';
+import { User } from '../_models/user';
 import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { BehaviorSubject, map } from 'rxjs';
 })
 export class AccountService {
 
-  baseUrl = environment.apiUrl;
+  private baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -20,7 +20,7 @@ export class AccountService {
       map(
         (response: User) => {
           const user = response;
-          if(user) this.currentUserSource.next(user);
+          if(user) this.setCurrentUser(user);
         }
       )
     );
@@ -31,10 +31,14 @@ export class AccountService {
       map(
         (response: User) => {
           const user = response;
-          if(user) this.currentUserSource.next(user);
+          if(user) this.setCurrentUser(user);
         }
       )
     )
+  }
+
+  getUsers(){
+    return this.http.get<any>(this.baseUrl + 'account/get-users');
   }
 
   logout(){
@@ -42,7 +46,7 @@ export class AccountService {
     localStorage.removeItem('user');
   }
 
-  private setCurrentUser(user: User){
+  setCurrentUser(user: User){
     this.currentUserSource.next(user);
     localStorage.setItem('user', JSON.stringify(user));
   }

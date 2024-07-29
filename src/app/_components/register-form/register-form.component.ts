@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { City, State } from 'src/app/_interfaces/state_city';
+import { City, State } from 'src/app/_models/state_city';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -163,9 +163,11 @@ export class RegisterFormComponent implements OnInit{
       const dateOfBirth = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
       const formValues = {...this.registerForm.value, dateOfBirth};
       this.accountService.register(formValues).subscribe({
+        next:() => {
+          this.router.navigateByUrl('search');
+        },
         error: error => console.log(error)
       });
-      console.log({...this.registerForm.value, dateOfBirth});
     }
 
     loadCities(stateName: string){

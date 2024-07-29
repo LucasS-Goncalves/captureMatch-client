@@ -14,8 +14,6 @@
         </div>
       </fieldset>
       <fieldset class="state-date-container">
-
-
         <div class="field-container">
           <label for="dateOfBirth">Date of birth</label>
           <input type="text" placeholder="DD/MM/YYYY" bsDatepicker [maxDate]="maxDate" [bsConfig]="{ isAnimated: true }" formControlName="date" formControlName="dateOfBirth" id="dateOfBirth"/>
@@ -73,7 +71,7 @@
 
       <div class="buttons-container">
         <small class="backText" routerLink="/goal">Go back <img src="../../../assets/icons/left-arrow-svgrepo-com.svg" class="left-arrow" alt=""></small>
-        <button class="register-button" type="submit" ><span>Register</span></button>
+        <button class="register-button" type="submit" [class.button-disabled]="!registerForm.valid" [disabled]="!registerForm.valid"><span>Register</span></button>
       </div>
     </form>
   </div>

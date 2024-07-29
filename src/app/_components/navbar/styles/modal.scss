@@ -5,11 +5,168 @@
 }
 
 .modal-header{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
 
+    .modal-title{
+      font-size: 1.8rem;
+      background: $gradient-purple-magenta;
+      font-family: $space-grotesk;
+      text-align: center;
+      color: $white;
+      padding: 15px 40px;
+      border-radius: 10px;
+      letter-spacing: .5px;
+    }
+
+  .closeLoginModalButton{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    padding: 0;
+    transform: scale(1.5);
+    color: $black-2;
+  }
 }
 
-.modal-title{
-  font-family: $dosis;
-  font-weight: 600;
-  font-size: 1.5rem;
+.modal-body{
+  padding: 30px 16px;
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .field-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+
+      label{
+        align-self: flex-start;
+        font-family: $lexend-deca;
+        font-weight: 400;
+        font-size: .8125rem;
+        color: $purple-2;
+      }
+
+      input{
+        width: 100%;
+        outline: none;
+        padding: 10px 12px;
+        border-radius: 5px;
+        border: 1px solid $purple-2;
+        color: $black-2;
+        font-family: $dosis;
+        font-weight: 500;
+        font-size: 1rem;
+        letter-spacing: .6px;
+        transition: .2s;
+
+        &:focus{
+          box-shadow: 0px 0px 0px 2px rgba(0, 9, 170, 0.301);
+        }
+
+        &::placeholder{
+          opacity: .6;
+        }
+      }
+
+      &.password-field{
+        position: relative;
+
+        .show-password{
+          position: absolute;
+          bottom: 13px;
+          right: 8px;
+
+          .eye-icon{
+            width: 20px;
+          }
+        }
+
+        input{
+          padding-right: 30px;
+        }
+      }
+
+      &.state-field{
+          position: relative;
+          outline: none;
+          padding: 10px 12px;
+          border-radius: 5px;
+          border: 1px solid $purple-2;
+
+        .state-field-title{
+          margin: 0;
+          font-family: $lexend-deca;
+          font-weight: 400;
+          font-size: .8125rem;
+          color: $purple-2;
+        }
+
+        .statesList{
+          display: none;
+        }
+
+        &.showStates{
+
+          .statesList{
+            width: 100%;
+            padding: 10px;
+            display: block;
+            position: absolute;
+            top: 0;
+            transform: translateY(-100%);
+            background-color: blue;
+            overflow-y: scroll;
+            max-height: 200px;
+          }
+        }
+      }
+    }
+
+    .logIn-button{
+      margin-top: 10px;
+      position: relative;
+      background: $purple;
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: $white;
+      text-align: center;
+
+      span{
+        font-size: 1.1rem;
+        z-index: 2;
+        position: relative;
+      }
+
+      &::after{
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: $black;
+        opacity: 0;
+        border-radius: 5px;
+        transition: .2s;
+        z-index: 1;
+      }
+
+      &:hover::after{
+        opacity: .2;
+      }
+    }
+  }
 }
+
+
+

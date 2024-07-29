@@ -17,7 +17,7 @@ body{
 }
 
 ul{
-  padding-left: unset;
+  padding:0 !important;
   margin: 0 !important;
 }
 
@@ -44,6 +44,22 @@ a,button{
 .bs-datepicker-body table th{
   color: $purple-2 !important;
   opacity: .5 !important;
+}
+
+.modal{
+  --bs-modal-width: 400px !important;
+}
+
+.modal-dialog{
+  max-width: 400px !important;
+  margin: auto !important;
+  margin-top: 40px !important;
+}
+
+.button-disabled{
+  opacity: .7;
+  cursor: default !important;
+  pointer-events: none
 }
 
 /* Importing Bootstrap SCSS file. */

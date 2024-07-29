@@ -105,15 +105,18 @@
     }
 
     .loginText{
-      font-size: .9375rem;
+      font-size: 1rem;
       font-family: $dosis;
+      font-weight: 500;
       margin-top: 40px;
       color: $black;
 
       a{
         color: $purple;
-        font-size: .9375rem;
+        font-size: 1rem;
         font-family: $dosis;
+        text-decoration: none;
+        font-weight: 500;
       }
     }
   }

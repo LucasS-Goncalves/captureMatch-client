@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,9 +11,17 @@ export class HomePageComponent implements OnInit{
 
   @ViewChild('dynamicText', {static: true}) dynamicText!: ElementRef<HTMLTitleElement>;
 
+  constructor(private accountService: AccountService, private router: Router){}
 
   ngOnInit(): void {
-    this.animateText()
+    this.animateText();
+    this.accountService.currentUser$.subscribe({
+      next: user => {
+        if(user){
+          this.router.navigateByUrl('search');
+        }
+      }
+    })
   }
 
   async animateText(){
@@ -62,7 +72,7 @@ export class HomePageComponent implements OnInit{
         // Wait for the animation to complete
         await new Promise(resolve => setTimeout(resolve, 100 * textSplit.length + 3000))
           .catch(
-            error => console.log('oi this is an error: ' + error)
+            error => console.log('this is an error: ' + error)
           );
 
         indexOfText++;

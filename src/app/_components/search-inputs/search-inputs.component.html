@@ -1,0 +1,72 @@
+<form [formGroup]="searchForm" (ngSubmit)="applyFilters()">
+  <fieldset class="searchPhotographersName">
+    <input type="text" placeholder="Search for a photographer" class="input" formControlName="photographersSearchName">
+    <span class="magnifying-glass">
+      <img src="../../../assets/icons/magnifying-glass.svg" alt="Magnifying Glass" class="icon">
+    </span>
+  </fieldset>
+
+  <div class="btn-group" dropdown #dropdown="bs-dropdown" [insideClick]="true" [autoClose]="false">
+
+    <div class="appliedFilters" *ngIf="filtersApplied">
+      <span class="title-name" *ngIf="stateSelected">
+        State: <strong>{{stateSelected}}</strong>
+      </span>
+      <span class="title-name" *ngIf="citySelected">
+        City: <strong>{{citySelected}}</strong>
+      </span>
+      <button class="removeFilters-button" (click)="clearFilters()">
+        <svg _ngcontent-ng-c2509577452="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em; height: 1em; vertical-align: middle; fill: currentColor; overflow: hidden;"><path _ngcontent-ng-c2509577452="" d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"></path></svg>
+      </button>
+    </div>
+
+      <button id="button-basic" dropdownToggle type="button" class="filter-dropdown-button"
+              aria-controls="dropdown-basic">
+        <span>Filters</span>
+        <img src="../../../assets/icons/filterIcon.svg" alt="Filter Icon" class="filter-icon">
+      </button>
+
+      <div *dropdownMenu class="dropdown-menu fieldsetsContainer">
+
+        <fieldset class="field-container">
+          <label for="state">State</label>
+          <input [typeahead]="states" (keyup.enter)="loadCities(stateSelected)" [optionsListTemplate]="customListTemplate" id="state" placeholder="Alaska" formControlName="state">
+
+          <ng-template #customListTemplate let-matches="matches" let-query="query" let-typeaheadTemplateMethods class="list-container">
+            <ul class="custom-list-group">
+              <li class="custom-list-group-item"
+               *ngFor="let match of matches"
+               [class.active]="typeaheadTemplateMethods.isActive(match)"
+               (click)="typeaheadTemplateMethods.selectMatch(match, $event)"
+               (click)="loadCities(match.item)"
+               (mouseenter)="typeaheadTemplateMethods.selectActive(match)">
+              {{ match.item }}
+              </li>
+            </ul>
+          </ng-template>
+        </fieldset>
+
+        <fieldset class="field-container">
+        <label for="city">City</label>
+        <input [typeahead]="cities" [optionsListTemplate]="customListTemplate" id="city" placeholder="Fairbanks" formControlName="city" [class.formIsInvalid]="searchForm.invalid">
+
+        <ng-template #customListTemplate let-matches="matches" let-query="query" let-typeaheadTemplateMethods class="list-container">
+          <ul class="custom-list-group">
+            <li class="custom-list-group-item"
+             *ngFor="let match of matches"
+             [class.active]="typeaheadTemplateMethods.isActive(match)"
+             (click)="typeaheadTemplateMethods.selectMatch(match, $event)"
+             (mouseenter)="typeaheadTemplateMethods.selectActive(match)">
+            {{ match.item }}
+            </li>
+          </ul>
+        </ng-template>
+        </fieldset>
+
+        <button class="applyFilter-button" (click)="dropdown.hide()" type="submit" [disabled]="searchForm.invalid" [class.formIsInvalid]="searchForm.invalid">
+          Apply filters
+        </button>
+      </div>
+
+    </div>
+</form>
